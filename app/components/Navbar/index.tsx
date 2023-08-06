@@ -37,7 +37,7 @@ const Navbar = () => {
       </div>
 
       {isMobileNavOpen && (
-        <div className=" w-full bg-white absolute mt-10 text-lg">
+        <div className=" h-full w-full p-10 absolute text-lg">
           <div className=" flex flex-col items-center gap-5">
             <p className=" cursor-pointer hover:font-medium">Add Link</p>
             <p className=" cursor-pointer hover:font-medium">My Bookmarks</p>
