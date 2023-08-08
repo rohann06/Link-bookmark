@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <>
       <div className=" flex justify-between items-center">
-        <Link href={'/'}>
+        <Link href={"/"}>
           <div className=" flex flex-col justify-center items-center">
             <div className=" text-2xl md:text-3xl">
               <HiOutlineLink />
@@ -24,7 +24,9 @@ const Navbar = () => {
             <Link href={"/addLink"}>
               <p className=" cursor-pointer hover:font-medium">Add Link</p>
             </Link>
-            <p className=" cursor-pointer hover:font-medium">My Bookmarks</p>
+            <Link href={"/myBookMarks"}>
+              <p className=" cursor-pointer hover:font-medium">My Bookmarks</p>
+            </Link>
             <p className=" cursor-pointer hover:font-medium">Logout</p>
           </div>
           {/* <div className=" flex items-center gap-5">
@@ -45,8 +47,12 @@ const Navbar = () => {
       {isMobileNavOpen && (
         <div className=" h-full w-full p-10 absolute text-lg">
           <div className=" flex flex-col items-center gap-5">
-            <p className=" cursor-pointer hover:font-medium">Add Link</p>
-            <p className=" cursor-pointer hover:font-medium">My Bookmarks</p>
+            <Link href={"/addLink"}>
+              <p className=" cursor-pointer hover:font-medium">Add Link</p>
+            </Link>
+            <Link href={"/myBookMarks"}>
+              <p className=" cursor-pointer hover:font-medium">My Bookmarks</p>
+            </Link>
             <p className=" cursor-pointer hover:font-medium">Logout</p>
           </div>
           {/* <div className=" flex items-center gap-5">

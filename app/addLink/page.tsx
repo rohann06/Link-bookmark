@@ -1,5 +1,5 @@
 import React from "react";
-import AddLinkForm from "../components/AddLinkForm";
+import AddLinkForm from "../components/Forms/AddLinkForm";
 
 const AddLink = () => {
   return (

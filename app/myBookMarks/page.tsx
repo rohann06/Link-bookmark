@@ -1,8 +1,9 @@
-import Card from "./components/Card";
+import React from "react";
+import Card from "../components/Card";
 
-export default function Home() {
+const MyBookMarks = () => {
   return (
-    <main>
+    <div>
       <div className=" md:my-20 grid gap-7 grid-cols-4">
         <Card />
         <Card />
@@ -10,6 +11,8 @@ export default function Home() {
         <Card />
         <Card />
       </div>
-    </main>
+    </div>
   );
-}
+};
+
+export default MyBookMarks;
