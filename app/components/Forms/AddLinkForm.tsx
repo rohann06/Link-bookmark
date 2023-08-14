@@ -17,7 +17,7 @@ const AddLinkForm = () => {
           <input type="text" className=" bg-white border px-3 py-2 w-full rounded-xl " />
         </div>
         <div className=" w-full bg-white">
-          <p className=" bg-white mb-2 font-Montserrat ">Add Link</p>
+          <p className=" bg-white mb-2 font-Montserrat ">Add URL</p>
           <input type="text" className=" bg-white border px-3 py-2 w-full rounded-xl " />
         </div>
         <div className=" w-full bg-white my-7">
