@@ -66,14 +66,14 @@ model Link {
   url         String
   imageUrl    String
   bookMarks   SavedLinks[]
-  userId      String?
-  User        User?        @relation(fields: [userId], references: [id])
+  authorId    String?
+  author      User?        @relation(fields: [authorId], references: [email])
 }
 
 model SavedLinks {
-  id     String  @id @default(cuid())
-  userId String?
-  linkId String?
-  User   User?   @relation(fields: [userId], references: [id])
-  Link   Link?   @relation(fields: [linkId], references: [id])
+  id       String  @id @default(cuid())
+  authorId String?
+  linkId   String?
+  author   User?   @relation(fields: [authorId], references: [email])
+  Link     Link?   @relation(fields: [linkId], references: [id])
 }
