@@ -4,8 +4,16 @@ import React, { useState } from "react";
 import { FiExternalLink } from "react-icons/fi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 
-const Card = () => {
+interface CardProps {
+  title: string;
+  description: string;
+  url: string;
+  imageUrl: string;
+}
+
+const Card = ({ title, description, url, imageUrl }: CardProps) => {
   const [isSave, satIsSave] = useState(false);
+  console.log("desceription", description);
   return (
     <div className=" bg-white w-fit p-2 rounded-2xl">
       <div className=" md:h-52 md:w-96 rounded-2xl overflow-hidden">
@@ -19,18 +27,21 @@ const Card = () => {
       </div>
       <div className=" py-5 px-2 bg-white">
         <p className=" text-2xl font-Montserrat font-semibold bg-white">
-          Foodie website
+          {title}
         </p>
-        <p className=" bg-white my-2 md:my-4 font-Montserrat">
-          It's a one of my personal website
-        </p>
+        <p className=" bg-white my-2 md:my-4 font-Montserrat">{description}</p>
         <div className=" flex justify-between items-center bg-white">
-          <div className=" bg-white flex items-center text-lg hover:text-blue-500 cursor-pointer">
-            Live Demo <FiExternalLink />
-          </div>
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <div className=" bg-white flex items-center text-lg hover:text-blue-500 cursor-pointer">
+              Live Demo <FiExternalLink />
+            </div>
+          </a>
+
           <div
             onClick={() => satIsSave(!isSave)}
-            className={` bg-white text-2xl cursor-pointer ${isSave&&"text-blue-500"}`}
+            className={` bg-white text-2xl cursor-pointer ${
+              isSave && "text-blue-500"
+            }`}
           >
             <BsFillBookmarkFill />
           </div>

@@ -30,6 +30,11 @@ const Navbar = () => {
               <Link href={"/addLink"}>
                 <p className=" cursor-pointer hover:font-medium">Add Link</p>
               </Link>
+              <Link href={"/myLinks"}>
+                <p className=" cursor-pointer hover:font-medium">
+                  My Links
+                </p>
+              </Link>
               <Link href={"/myBookMarks"}>
                 <p className=" cursor-pointer hover:font-medium">
                   My Bookmarks
