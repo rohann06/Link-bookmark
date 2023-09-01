@@ -4,16 +4,18 @@ import React, { useState } from "react";
 import { HiOutlineLink } from "react-icons/hi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Profile from "../Profile";
 
 const Navbar = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [openNavOptions, setOpenNavOptions] = useState(false);
   const { data: session } = useSession();
 
   console.log("Session data", session?.user);
 
   return (
     <>
-      <div className=" flex justify-between items-center">
+      <div className=" flex justify-between items-center mb-10">
         <Link href={"/"}>
           <div className=" flex flex-col justify-center items-center">
             <div className=" text-2xl md:text-3xl">
@@ -27,25 +29,35 @@ const Navbar = () => {
         <div className=" hidden md:block">
           {session && session?.user ? (
             <div className=" flex items-center gap-5">
-              <Link href={"/addLink"}>
-                <p className=" cursor-pointer hover:font-medium">Add Link</p>
-              </Link>
-              <Link href={"/myLinks"}>
-                <p className=" cursor-pointer hover:font-medium">
-                  My Links
-                </p>
-              </Link>
-              <Link href={"/myBookMarks"}>
-                <p className=" cursor-pointer hover:font-medium">
-                  My Bookmarks
-                </p>
-              </Link>
-              <p
-                onClick={() => signOut()}
-                className=" cursor-pointer hover:font-medium"
-              >
-                Logout
-              </p>
+              {openNavOptions && (
+                <>
+                  <Link href={"/addLink"}>
+                    <p className=" cursor-pointer hover:font-medium">
+                      Add Link
+                    </p>
+                  </Link>
+                  <Link href={"/myLinks"}>
+                    <p className=" cursor-pointer hover:font-medium">
+                      My Links
+                    </p>
+                  </Link>
+                  <Link href={"/myBookMarks"}>
+                    <p className=" cursor-pointer hover:font-medium">
+                      My Bookmarks
+                    </p>
+                  </Link>
+                  <p
+                    onClick={() => signOut()}
+                    className=" cursor-pointer hover:font-medium"
+                  >
+                    Logout
+                  </p>
+                </>
+              )}
+
+              <div onClick={() => setOpenNavOptions(!openNavOptions)}>
+                <Profile />
+              </div>
             </div>
           ) : (
             <div
@@ -63,7 +75,7 @@ const Navbar = () => {
             onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
             className=" text-3xl"
           >
-            <RxHamburgerMenu />
+            <Profile />
           </div>
         </div>
       </div>
