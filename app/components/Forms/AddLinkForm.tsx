@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { supabase } from "@/utils/supabse";
 
 const AddLinkForm = () => {
   const { data: session } = useSession();
@@ -13,11 +14,30 @@ const AddLinkForm = () => {
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  var filename = imageUrl.replace(/^.*[\\\/]/, '')
+  const image = `https://xsydwnoephsnngmhirri.supabase.co/storage/v1/object/public/link_images/public/${filename}`;
+  console.log("filename", filename)
+  const handleUploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    let file;
+    if (e.target.files) {
+      file = e.target.files[0];
+    }
+
+    const { data, error } = await supabase.storage
+      .from("link_images")
+      .upload("public/" + file?.name, file as File);
+
+    if (data) {
+      console.log(data);
+    } else if (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmitLink = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = { title, description, url, imageUrl, authorId };
+    const data = { title, description, url, imageUrl:image , authorId };
 
     try {
       axios
@@ -83,7 +103,10 @@ const AddLinkForm = () => {
           <input
             type="file"
             value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
+            onChange={(e) => {
+              handleUploadImage(e);
+              setImageUrl(e.target.value);
+            }}
             className=" bg-white border px-3 py-2 w-full rounded-xl "
           />
         </div>

@@ -14,6 +14,7 @@ interface CardProps {
 const Card = ({ title, description, url, imageUrl }: CardProps) => {
   const [isSave, satIsSave] = useState(false);
   console.log("desceription", description);
+
   return (
     <div className=" bg-white w-fit p-2 rounded-2xl">
       <div className=" md:h-52 md:w-96 rounded-2xl overflow-hidden">
@@ -21,7 +22,7 @@ const Card = ({ title, description, url, imageUrl }: CardProps) => {
           className=" h-full w-full "
           height={400}
           width={400}
-          src={"/image.png"}
+          src={imageUrl}
           alt="Image"
         />
       </div>
