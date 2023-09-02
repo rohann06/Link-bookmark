@@ -19,6 +19,7 @@ const MyLink = () => {
   const { data: session } = useSession();
   const [myLinks, setMyLinks] = useState<MyLink[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
   const getAllMyLinks = async () => {
     try {
       setIsLoading(true);
@@ -54,6 +55,7 @@ const MyLink = () => {
                   description={link?.description}
                   url={link?.url}
                   imageUrl={link?.imageUrl}
+                  id={link?.id}
                 />
               )}
             </>
