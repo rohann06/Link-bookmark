@@ -14,9 +14,11 @@ const AddLinkForm = () => {
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  var filename = imageUrl.replace(/^.*[\\\/]/, '')
+  const [isLoading, setIsLoading] = useState(false);
+
+  var filename = imageUrl.replace(/^.*[\\\/]/, "");
   const image = `https://xsydwnoephsnngmhirri.supabase.co/storage/v1/object/public/link_images/public/${filename}`;
-  console.log("filename", filename)
+  console.log("filename", filename);
   const handleUploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     let file;
     if (e.target.files) {
@@ -37,9 +39,10 @@ const AddLinkForm = () => {
   const handleSubmitLink = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = { title, description, url, imageUrl:image , authorId };
+    const data = { title, description, url, imageUrl: image, authorId };
 
     try {
+      setIsLoading(true);
       axios
         .post("api/postLink", data)
         .then((response) => {
@@ -51,6 +54,7 @@ const AddLinkForm = () => {
           toast.error("Oops! Something went wrong");
         })
         .finally(() => {
+          setIsLoading(false);
           router.push("/");
         });
     } catch (error) {
@@ -58,69 +62,77 @@ const AddLinkForm = () => {
     }
   };
   return (
-    <div className=" bg-white rounded-2xl px-5 py-10 mt-20 mx-80">
-      <h1 className=" text-center text-xl font-Montserrat font-semibold py-5 bg-white">
-        Add Your Link
-      </h1>
-      <form onSubmit={handleSubmitLink} className=" bg-white">
-        <div className=" w-full bg-white">
-          <p className=" bg-white mb-2 font-Montserrat ">
-            Link Title <span className=" text-red-500 bg-white">*</span>
-          </p>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className=" bg-white border px-3 py-2 w-full rounded-xl "
-          />
-        </div>
-        <div className=" w-full bg-white my-7">
-          <p className=" bg-white mb-2 font-Montserrat ">
-            Link Description <span className=" text-red-500 bg-white">*</span>
-          </p>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className=" bg-white border px-3 py-2 w-full rounded-xl "
-          />
-        </div>
-        <div className=" w-full bg-white">
-          <p className=" bg-white mb-2 font-Montserrat ">
-            Add URL <span className=" text-red-500 bg-white">*</span>
-          </p>
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className=" bg-white border px-3 py-2 w-full rounded-xl "
-          />
-        </div>
-        <div className=" w-full bg-white my-7">
-          <p className=" bg-white mb-2 font-Montserrat ">
-            Link Image <span className=" text-red-500 bg-white">*</span>
-          </p>
-          <input
-            type="file"
-            value={imageUrl}
-            onChange={(e) => {
-              handleUploadImage(e);
-              setImageUrl(e.target.value);
-            }}
-            className=" bg-white border px-3 py-2 w-full rounded-xl "
-          />
-        </div>
+    <>
+      <div className=" bg-white rounded-2xl px-5 py-10 mt-20 mx-80">
+        <h1 className=" text-center text-xl font-Montserrat font-semibold py-5 bg-white">
+          Add Your Link
+        </h1>
+        <form onSubmit={handleSubmitLink} className=" bg-white">
+          <div className=" w-full bg-white">
+            <p className=" bg-white mb-2 font-Montserrat ">
+              Link Title <span className=" text-red-500 bg-white">*</span>
+            </p>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className=" bg-white border px-3 py-2 w-full rounded-xl "
+            />
+          </div>
+          <div className=" w-full bg-white my-7">
+            <p className=" bg-white mb-2 font-Montserrat ">
+              Link Description <span className=" text-red-500 bg-white">*</span>
+            </p>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className=" bg-white border px-3 py-2 w-full rounded-xl "
+            />
+          </div>
+          <div className=" w-full bg-white">
+            <p className=" bg-white mb-2 font-Montserrat ">
+              Add URL <span className=" text-red-500 bg-white">*</span>
+            </p>
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className=" bg-white border px-3 py-2 w-full rounded-xl "
+            />
+          </div>
+          <div className=" w-full bg-white my-7">
+            <p className=" bg-white mb-2 font-Montserrat ">
+              Link Image <span className=" text-red-500 bg-white">*</span>
+            </p>
+            <input
+              type="file"
+              value={imageUrl}
+              onChange={(e) => {
+                handleUploadImage(e);
+                setImageUrl(e.target.value);
+              }}
+              className=" bg-white border px-3 py-2 w-full rounded-xl "
+            />
+          </div>
 
-        <div className=" bg-white flex justify-center items-center ">
-          <button
-            type="submit"
-            className=" bg-blue-600 text-center px-60 py-2 text-white font-Montserrat rounded-xl"
-          >
-            Add Link
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className=" bg-white flex justify-center items-center ">
+            <button
+              type="submit"
+              className=" bg-blue-600 text-center px-60 py-2 text-white font-Montserrat rounded-xl"
+            >
+              {isLoading ? (
+                <p className=" text-center text-white bg-blue-600 font-Montserrat cursor-not-allowed animate-pulse">
+                  Loading...
+                </p>
+              ) : (
+                <>Add Link</>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

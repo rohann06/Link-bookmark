@@ -15,6 +15,10 @@ const Card = ({ title, description, url, imageUrl }: CardProps) => {
   const [isSave, satIsSave] = useState(false);
   console.log("desceription", description);
 
+  const handleSave = async () => {
+    alert("saved");
+  };
+
   return (
     <div className=" bg-white w-fit p-2 rounded-2xl">
       <div className=" md:h-52 md:w-96 rounded-2xl overflow-hidden">
@@ -39,7 +43,9 @@ const Card = ({ title, description, url, imageUrl }: CardProps) => {
           </a>
 
           <div
-            onClick={() => satIsSave(!isSave)}
+            onClick={() => {
+              satIsSave(!isSave);
+            }}
             className={` bg-white text-2xl cursor-pointer ${
               isSave && "text-blue-500"
             }`}
