@@ -54,12 +54,14 @@ const linkDetails = (id: URL) => {
             {linksDetails.map((linksDetail) => {
               return (
                 <>
-                  <LinkDetail
-                    title={linksDetail?.title}
-                    image={linksDetail?.imageUrl}
-                    url={linksDetail?.url}
-                    description={linksDetail?.description}
-                  />
+                  {linksDetail?.id === authorId && (
+                    <LinkDetail
+                      title={linksDetail?.title}
+                      image={linksDetail?.imageUrl}
+                      url={linksDetail?.url}
+                      description={linksDetail?.description}
+                    />
+                  )}
                 </>
               );
             })}
