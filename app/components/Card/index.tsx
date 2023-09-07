@@ -18,14 +18,18 @@ const Card = ({ title, description, url, imageUrl, id }: CardProps) => {
   const [isSave, satIsSave] = useState(false);
   const router = useRouter();
   console.log("desceription", description);
+  console.log("isSave", isSave);
 
-  const handleSave = async () => {
-    alert("saved");
+  const handleSave = () => {
+
+    {
+
+    }
   };
 
   return (
-    <Link href={{ pathname: `/linkDetail/${id}` }}>
-      <div className=" bg-white w-fit p-2 rounded-2xl">
+    <div className=" bg-white w-fit p-2 rounded-2xl">
+      <Link href={{ pathname: `/linkDetail/${id}` }}>
         <div className=" md:h-52 md:w-96 rounded-2xl overflow-hidden">
           <Image
             className=" h-full w-full "
@@ -35,34 +39,35 @@ const Card = ({ title, description, url, imageUrl, id }: CardProps) => {
             alt="Image"
           />
         </div>
-        <div className=" py-5 px-2 bg-white">
+      </Link>
+      <div className=" py-5 px-2 bg-white">
+        <Link href={{ pathname: `/linkDetail/${id}` }}>
           <p className=" text-2xl font-Montserrat font-semibold bg-white">
             {title}
           </p>
           <p className=" bg-white my-2 md:my-4 font-Montserrat">
             {description}
           </p>
-          <div className=" flex justify-between items-center bg-white">
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              <div className=" bg-white flex items-center text-lg hover:text-blue-500 cursor-pointer">
-                Live Demo <FiExternalLink />
-              </div>
-            </a>
+        </Link>
+        <div className=" flex justify-between items-center bg-white">
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <div className=" bg-white flex items-center text-lg hover:text-blue-500 cursor-pointer">
+              Live Demo <FiExternalLink />
+            </div>
+          </a>
 
+          <button onClick={handleSave}>
             <div
-              onClick={() => {
-                satIsSave(!isSave);
-              }}
               className={` bg-white text-2xl cursor-pointer ${
                 isSave && "text-blue-500"
               }`}
             >
               <BsFillBookmarkFill />
             </div>
-          </div>
+          </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

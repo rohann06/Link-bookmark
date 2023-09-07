@@ -3,6 +3,7 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { IoPersonSharp } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
+import Image from "next/image";
 const Profile = () => {
   const { data: session } = useSession();
   const image: string = session?.user?.image || "";
@@ -11,7 +12,12 @@ const Profile = () => {
       {image ? (
         <div className=" flex flex-row-reverse items-center gap-2 md:gap-3 rounded-full bg-black ">
           <div className=" rounded-full overflow-hidden h-9 w-9 md:h-11 md:w-11">
-            <img src={image} alt="Myimg" className=" h-full w-full " />
+            <img
+              loading="lazy"
+              src={image}
+              alt="Myimg"
+              className=" h-full w-full "
+            />
           </div>
           <div className=" text-white text-2xl ">
             <RxHamburgerMenu className="bg-black" />
@@ -22,7 +28,8 @@ const Profile = () => {
           <div className=" flex flex-row-reverse items-center gap-3 rounded-full bg-black ">
             <div className=" p-[12px]  rounded-full bg-gray-700 text-xl">
               <IoPersonSharp className=" bg-gray-700 text-white " />
-            </div>s
+            </div>
+            s
             <div className=" text-white text-2xl ">
               <RxHamburgerMenu className="bg-black" />
             </div>
